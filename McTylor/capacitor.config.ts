@@ -5,7 +5,8 @@ const config: CapacitorConfig = {
   appName: 'McTylor',
   webDir: 'www',
   server: {
-    androidScheme: 'https'
+    androidScheme: 'http',
+    url: 'http://192.168.1.14:4200'
   }
 };
 

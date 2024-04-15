@@ -24,3 +24,29 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+ 
+@import url(https://fonts.google.com/specimen/Roboto);
+
+ion-button {
+    font-size: 16px;
+    font-weight: 600;
+    --color: #FFFFFF; 
+    --border-radius: 14px;
+    text-transform: none;
+}
+
+ion-grid {
+    --ion-grid-padding: 10%;
+  }
+
+.title {
+    font-size: 24px;
+    font-weight: 500;
+    color:#FFFFFF
+}
+
+.caption {
+    font-size: 15px;
+    font-weight: 600;
+}
+

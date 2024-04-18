@@ -9,7 +9,7 @@ import { Camera, CameraResultType } from '@capacitor/camera';
 })
 export class PicturePageComponent  implements OnInit {
   component = LastPageComponent;
-  picture: string | undefined = '';
+  picture: string | undefined = 'assets/icon/image-svgrepo-com.svg';
   constructor() {}
   registerContacts = async () => {
     let permStatus = await Camera.checkPermissions()
@@ -21,14 +21,6 @@ export class PicturePageComponent  implements OnInit {
     }
   }
   async selfie() {
-    let permStatus = await Camera.checkPermissions()
-    if (permStatus.camera === 'prompt') {
-      await Camera.requestPermissions()
-    }
-    if (permStatus.camera !== 'granted') {
-      throw new Error('User denied permissions!')
-    }
-
   const image = await Camera.getPhoto({
     quality: 100,
     allowEditing: false,

@@ -33,6 +33,7 @@ ion-button {
     --color: #FFFFFF; 
     --border-radius: 14px;
     text-transform: none;
+    height: 54px;
 }
 
 ion-grid {
@@ -40,13 +41,19 @@ ion-grid {
   }
 
 .title {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 500;
     color:#FFFFFF
 }
 
 .caption {
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 600;
+}
+
+.description {
+    font-size: 17px;
+    font-weight: 400;
+    color: #BBBBBB;
 }
 

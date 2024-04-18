@@ -1,90 +1,38 @@
-<!-- <ion-content *ngIf="width != undefined && height!= undefined" style="width:'width'; height: 'height';">
-  <div class="container" style="    
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: center;
-  padding: 50% 10%;">
-    <div class="row justify-content-md-center">
-      <div class="col-24">
-        <p class="title" style="display: flex; justify-content: center;">Welcome to McTylor</p>
-      </div>
-    </div>
-    <div class="row" style="display:flex">
-      <div class="col-1" style="display: flex; justify-content:flex-end; width:30%; height:30%;"> 
-        <img [src]="'assets/icon/camera-svgrepo-com.svg'">
-      </div>
-      <div class="col-23"> 
-        <div>Capture Moments</div>
-        <div>Easily open your device's native camera to take pictures within the app.</div>
-      </div>
-    </div>
-    <div class="row" style="display:flex">
-      <div class="col-1" style="display: flex; justify-content:flex-end; width:30%; height:30%;"> 
-        <img [src]="'assets/icon/picture-svgrepo-com.svg'">
-      </div>
-      <div class="col-23" style="margin-left:15px"> 
-        <div class="caption">Capture Moments</div>
-        <div>Easily open your device's native camera to take pictures within the app.</div>
-      </div>
-    </div>
-    <div class="row" style="display:flex">
-      <div class="col-1" style="display: flex; justify-content:flex-end; width:30%; height:30%;"> 
-        <img [src]="'assets/icon/information-svgrepo-com.svg'">
-      </div>
-      <div class="col-23"> 
-        <div>Capture Moments</div>
-        <div>Easily open your device's native camera to take pictures within the app.</div>
-      </div>
-    </div>  
-    <div class="row" style="    
-    display: flex;
-    justify-content: center;
-    width:100%">
-      <div class="col-24" style="width:100%">
-        <ion-nav-link router-direction="forward" [component]="component">
-          <ion-button style="width:100%">Get started</ion-button>
-        </ion-nav-link>
-      </div>
-    </div>
-  </div>  
-</ion-content> -->
-
-<ion-content *ngIf="width !== undefined && height !== undefined">
-  <ion-grid size=[fixed]>
-    <ion-row class="ion-justify-content-center">
+<ion-content>
+  <ion-grid size=[fixed] style="height:100%">
+    <ion-row class="ion-justify-content-center" style="margin-top:20px">
       <ion-col size="auto">
         <p class="title">Welcome to McTylor</p>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col size="2">
+    <ion-row style="margin-top:15px" class="ion-justify-content-center">
+      <ion-col size="2" style="margin-right:10px">
         <img [src]="'assets/icon/camera-svgrepo-com.svg'" style="height: auto; width: auto">
       </ion-col>
       <ion-col>
         <div class="caption">Capture Moments</div>
-        <div>Easily open your device's native camera to take pictures within the app.</div>
+        <div class="description" style="margin-top: 5px">Easily open your device's native camera to take pictures within the app.</div>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col size="2">
+    <ion-row style="margin-top:20px">
+      <ion-col size="2" style="margin-right:10px">
         <img [src]="'assets/icon/picture-svgrepo-com.svg'">
       </ion-col>
       <ion-col>
         <div class="caption">Automatic location tagging</div>
-        <div>Seamlessly attaches your current location to each photo you take, providing context of where each moment was captured.</div>
+        <div class="description" style="margin-top: 5px">Seamlessly attaches your current location to each photo you take, providing context of where each moment was captured.</div>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col size="2">
+    <ion-row style="margin-top:20px">
+      <ion-col size="2" style="margin-right:10px">
         <img [src]="'assets/icon/information-svgrepo-com.svg'">
       </ion-col>
       <ion-col>
         <div class="caption">Commenting feature</div>
-        <div>Share your thoughts by adding comments to your photos, creating a personalized narrative for each picture.</div>
+        <div class="description" style="margin-top: 5px">Share your thoughts by adding comments to your photos, creating a personalized narrative for each picture.</div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row class="ion-align-items-end" style="height:30%;">
       <ion-col>
         <ion-nav-link router-direction="forward" [component]="component">
           <ion-button style="width:100%">Get started</ion-button>

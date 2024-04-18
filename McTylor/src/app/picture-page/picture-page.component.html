@@ -1,10 +1,18 @@
-<ion-buttons slot="start">
-  <ion-back-button></ion-back-button>
-</ion-buttons>
-<ion-content class="ion-padding">
-  <h1>Page two</h1>
-  <ion-nav-link router-direction="forward" [component]="component">
-    <ion-button>Go to Page Two</ion-button>
-  </ion-nav-link>
+<ion-content>
+  <ion-grid style="height: 100%;">
+    <ion-row class="ion-justify-content-center ion-align-items-center" style="height: 50%;">
+      <ion-col size="4">
+        <img [src]="'assets/icon/image-svgrepo-com.svg'">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button style="width:100%" (click)="selfie()">Take picutre</ion-button>
+        <ion-nav-link router-direction="forward" [component]="component">
+          
+        </ion-nav-link>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 

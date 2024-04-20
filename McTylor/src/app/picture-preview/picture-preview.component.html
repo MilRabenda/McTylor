@@ -1,0 +1,30 @@
+<ion-content >
+  <ion-grid style="height: 100%;">
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col>
+        <img [src]="picture">
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-bottom: 5px; padding: 5px; ">
+      <ion-col style="display: flex;
+      flex-direction: row; width: 100%; justify-content: flex-start;
+    align-items: center; font-size: 12px;">
+        <img  style="height:15px; width:15px; margin-right: 5px"[src]="'assets/icon/pin-svgrepo-com.svg'">
+        <div style="color: #797979">{{position}}</div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-textarea class="ion-textarea" aria-label="Custom textarea" placeholder="Enter comment"></ion-textarea>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-nav-link router-direction="forward" [component]="component">
+          <ion-button style="width:100%">Send</ion-button>
+        </ion-nav-link>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

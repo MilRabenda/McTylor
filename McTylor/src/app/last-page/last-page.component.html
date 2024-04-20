@@ -1,1 +1,17 @@
-
+<ion-content>
+    <ion-grid style="height: 100%;">
+      <ion-row class="ion-justify-content-center ion-align-items-center" style="height: 50%;">
+        <ion-col size="4">
+          <img [src]="'assets/icon/upload-svgrepo-com.svg'">
+          <div class="caption">All Done!</div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-nav-link router-direction="root" [component]="component">
+            <ion-button style="width:100%">Take another picture</ion-button>
+          </ion-nav-link>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>

@@ -36,6 +36,17 @@ ion-button {
     height: 54px;
 }
 
+.ion-textarea {
+    --background: #32393E;
+    --color: #FFFFFF;
+    --border-radius: 14px;
+    --padding-end: 10px;
+    --padding-start: 10px;
+    --placeholder-color: #797979;
+    font-size: 16px;
+    height: 100px;
+}
+
 ion-grid {
     --ion-grid-padding: 10%;
   }

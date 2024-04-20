@@ -1,36 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { LastPageComponent } from '../last-page/last-page.component';
-import { Camera, CameraResultType } from '@capacitor/camera';
+import { PicturePreviewComponent } from '../picture-preview/picture-preview.component';
+import { App, AppPlugin } from '@capacitor/app';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-picture-page',
   templateUrl: './picture-page.component.html',
   styleUrls: ['./picture-page.component.scss'],
 })
-export class PicturePageComponent  implements OnInit {
-  component = LastPageComponent;
-  picture: string | undefined = 'assets/icon/image-svgrepo-com.svg';
+export class PicturePageComponent implements OnInit {
+
+  component = PicturePreviewComponent;
+  app!: AppPlugin;
+  nav!: NavController;
+  picture: string = 'assets/icon/image-svgrepo-com.svg';
+
   constructor() {}
-  registerContacts = async () => {
-    let permStatus = await Camera.checkPermissions()
-    if (permStatus.camera === 'prompt') {
-      await Camera.requestPermissions()
-    }
-    if (permStatus.camera !== 'granted') {
-      throw new Error('User denied permissions!')
-    }
-  }
-  async selfie() {
-  const image = await Camera.getPhoto({
-    quality: 100,
-    allowEditing: false,
-    resultType: CameraResultType.DataUrl
-  });
-  this.picture = image.dataUrl;
-  }
 
   ngOnInit() {
-    this.registerContacts;
   }
-
 }

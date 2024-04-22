@@ -9,7 +9,6 @@ import { Camera, CameraResultType } from '@capacitor/camera';
   styleUrls: ['./picture-preview.component.scss'],
 })
 export class PicturePreviewComponent implements OnInit {
-  xddd: string = '';
 
   position!: string;
 
@@ -40,11 +39,5 @@ export class PicturePreviewComponent implements OnInit {
       location.coords.latitude.toString() +
       ' ' +
       location.coords.longitude.toString();
-  }
-
-  set(picname: string): boolean {
-    this.xddd = picname;
-    console.log(this.xddd);
-    return true;
   }
 }

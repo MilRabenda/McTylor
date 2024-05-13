@@ -1,0 +1,14 @@
+D:\McTylor\McTylorDB\bin\Debug\net6.0\McTylorDB.deps.json
+D:\McTylor\McTylorDB\bin\Debug\net6.0\McTylorDB.dll
+D:\McTylor\McTylorDB\bin\Debug\net6.0\McTylorDB.pdb
+D:\McTylor\McTylorDB\obj\Debug\net6.0\McTylorDB.csproj.AssemblyReference.cache
+D:\McTylor\McTylorDB\obj\Debug\net6.0\McTylorDB.GeneratedMSBuildEditorConfig.editorconfig
+D:\McTylor\McTylorDB\obj\Debug\net6.0\McTylorDB.AssemblyInfoInputs.cache
+D:\McTylor\McTylorDB\obj\Debug\net6.0\McTylorDB.AssemblyInfo.cs
+D:\McTylor\McTylorDB\obj\Debug\net6.0\McTylorDB.csproj.CoreCompileInputs.cache
+D:\McTylor\McTylorDB\obj\Debug\net6.0\McTylorDB.dll
+D:\McTylor\McTylorDB\obj\Debug\net6.0\refint\McTylorDB.dll
+D:\McTylor\McTylorDB\obj\Debug\net6.0\McTylorDB.pdb
+D:\McTylor\McTylorDB\obj\Debug\net6.0\ref\McTylorDB.dll
+D:\McTylor\McTylorDB\bin\Debug\net6.0\McTylorDB.runtimeconfig.json
+D:\McTylor\McTylorDB\obj\Debug\net6.0\McTylorDB.genruntimeconfig.cache

@@ -13,9 +13,20 @@
         <div style="color: #797979">{{position}}</div>
       </ion-col>
     </ion-row>
+    <ion-row *ngIf="categories">
+      <ion-col>
+        <ion-list class="ion-select">
+          <ion-item style="background: #32393E;">
+            <ion-select style="background: #32393E;" aria-label="Fruit" interface="action-sheet" placeholder="Select Category">
+                <ion-select-option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
     <ion-row>
       <ion-col>
-        <ion-textarea class="ion-textarea" aria-label="Custom textarea" placeholder="Enter comment"></ion-textarea>
+        <ion-input class="ion-textarea" label="Comment" label-placement="floating" fill="outline" placeholder="Enter comment"></ion-input>
       </ion-col>
     </ion-row>
     <ion-row>

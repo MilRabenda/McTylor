@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using McTylorDB;
+using McTylorDB.Models;
 
 namespace McTylorAPI.Controllers
 {
@@ -6,16 +8,17 @@ namespace McTylorAPI.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
+        private readonly McTylorContext database;
+
         private static readonly string[] Summaries = new[]
         {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+        };
 
-        private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(McTylorContext context)
         {
-            _logger = logger;
+            this.database = context;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
@@ -28,6 +31,12 @@ namespace McTylorAPI.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpGet("xd")]
+        public IEnumerable<Category> GetCategories()
+        {
+            return this.database.Categories.ToList();
         }
     }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { LastPageComponent } from '../last-page/last-page.component';
 import { Geolocation } from '@capacitor/geolocation';
 import { Camera, CameraResultType } from '@capacitor/camera';
+import { HttpClient } from '@angular/common/http';
+import { Category } from '../Models/Category';
 
 @Component({
   selector: 'app-picture-preview',
@@ -14,13 +16,20 @@ export class PicturePreviewComponent implements OnInit {
 
   picture!: string;
 
+  categories: Category[] = [];
+
   component = LastPageComponent;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.selfie();
     this.location();
+    console.log("get")
+    this.http.get<Category[]>("https://localhost:7277/Main/GetCategories").subscribe((response)=>{
+      this.categories = response;
+      console.log(this.categories);
+    })
   }
 
   async selfie() {

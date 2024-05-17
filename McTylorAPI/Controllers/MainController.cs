@@ -1,6 +1,8 @@
 ﻿using McTylorDB;
 using McTylorDB.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace McTylorAPI.Controllers
 {
@@ -67,23 +69,47 @@ namespace McTylorAPI.Controllers
         [HttpGet("GetPhotos")]
         public IEnumerable<Photo> GetPhotos()
         {
-            return this.database.Photos.ToList();
+            return this.database.Photos
+                .OrderBy(photo => photo.Date)
+                    .ToList();
         }
 
         [HttpPost("AddPhoto")]
-        public ActionResult AddPhoto()
+        public async Task<IActionResult> AddPhoto([FromForm] IFormFile picture, [FromForm] string latitude, 
+            [FromForm] string longitude, [FromForm] string date, [FromForm] string categoryId, [FromForm] string comment)
         {
+            if (picture == null || picture.Length == 0)
+                return BadRequest("No file uploaded.");
+
             try
             {
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(picture.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", fileName);
+
+                Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads"));
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await picture.CopyToAsync(stream);
+                }
+
+                Photo newPhoto = new Photo();
+                newPhoto.CategoryId = Convert.ToInt32(categoryId);
+                newPhoto.Path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", fileName);
+                newPhoto.Latitude = Double.Parse(latitude, CultureInfo.InvariantCulture);
+                newPhoto.Longitude = Double.Parse(longitude, CultureInfo.InvariantCulture);
+                newPhoto.Date = Convert.ToDateTime(date);
+                newPhoto.Comment = comment;
+
+                this.database.Photos.Add(newPhoto);
                 this.database.SaveChanges();
 
-                return Ok();
+                return Ok(new { filePath, date });
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-
     }
 }

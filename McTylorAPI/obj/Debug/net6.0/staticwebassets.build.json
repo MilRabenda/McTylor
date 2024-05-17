@@ -1,11 +1,54 @@
 {
   "Version": 1,
-  "Hash": "XIGG9XRfn6tUpn6caqBPHtEZv2qTmbcCUOKsvwCl308=",
+  "Hash": "aOg2E17SfCMJpX+Y/fKsj0DyNNrbUHjMmcw0RzK2XfQ=",
   "Source": "McTylorAPI",
   "BasePath": "_content/McTylorAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "McTylorAPI\\wwwroot",
+      "Source": "McTylorAPI",
+      "ContentRoot": "D:\\McTylor\\McTylorAPI\\wwwroot\\",
+      "BasePath": "_content/McTylorAPI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\McTylor\\McTylorAPI\\wwwroot\\uploads\\6e1ac66d-8ef2-4e97-a0c1-1a690abd6bd5.jpg",
+      "SourceId": "McTylorAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\McTylor\\McTylorAPI\\wwwroot\\",
+      "BasePath": "_content/McTylorAPI",
+      "RelativePath": "uploads/6e1ac66d-8ef2-4e97-a0c1-1a690abd6bd5.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\6e1ac66d-8ef2-4e97-a0c1-1a690abd6bd5.jpg"
+    },
+    {
+      "Identity": "D:\\McTylor\\McTylorAPI\\wwwroot\\uploads\\b0011c80-c01d-4ab1-8dbf-07a564fd1c39.jpg",
+      "SourceId": "McTylorAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\McTylor\\McTylorAPI\\wwwroot\\",
+      "BasePath": "_content/McTylorAPI",
+      "RelativePath": "uploads/b0011c80-c01d-4ab1-8dbf-07a564fd1c39.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\b0011c80-c01d-4ab1-8dbf-07a564fd1c39.jpg"
+    }
+  ]
 }

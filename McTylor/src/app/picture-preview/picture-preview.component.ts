@@ -4,6 +4,10 @@ import { Geolocation } from '@capacitor/geolocation';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { HttpClient } from '@angular/common/http';
 import { Category } from '../Models/Category';
+import { Photo } from '../Models/Photo';
+import EXIF from 'exif-js';
+import { ExifParser } from 'ts-exif-parser/lib/ExifParser';
+import {ExifParserFactory} from "ts-exif-parser";
 
 @Component({
   selector: 'app-picture-preview',
@@ -11,36 +15,53 @@ import { Category } from '../Models/Category';
   styleUrls: ['./picture-preview.component.scss'],
 })
 export class PicturePreviewComponent implements OnInit {
-
   position!: string;
 
   picture!: string;
 
+  comment!: string;
+
+  latitude!: number;
+
+  longitude!: number;
+
+  date!: Date;
+
+  selectedCategory!: Category;
+
   categories: Category[] = [];
 
   component = LastPageComponent;
+  metaData: any;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.selfie();
+
     this.location();
-    console.log("get")
-    this.http.get<Category[]>("https://localhost:7277/Main/GetCategories").subscribe((response)=>{
-      this.categories = response;
-      console.log(this.categories);
-    })
+
+    this.http
+      .get<Category[]>('https://localhost:44391/Main/GetCategories')
+      .subscribe(response =>{
+        this.categories = response;
+      });
   }
 
   async selfie() {
     const image = await Camera.getPhoto({
       quality: 100,
       allowEditing: false,
-      resultType: CameraResultType.DataUrl,
+      resultType: CameraResultType.Uri,
     });
 
-    this.picture = image.dataUrl ? image.dataUrl : '';
+    this.picture = image.webPath ? image.webPath : '';
+
+    if(this.picture){
+      this.processImage();
+    }
   }
+
   async location() {
     const location = await Geolocation.getCurrentPosition();
 
@@ -48,5 +69,73 @@ export class PicturePreviewComponent implements OnInit {
       location.coords.latitude.toString() +
       ' ' +
       location.coords.longitude.toString();
+
+    this.longitude = location.coords.longitude;
+    this.latitude = location.coords.latitude;
+  }
+
+  async uriToBlob(uri: string): Promise<Blob> {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        resolve(xhr.response);
+      };
+      xhr.onerror = function () {
+        reject(new Error('Failed to convert URI to Blob'));
+      };
+      xhr.responseType = 'blob';
+      xhr.open('GET', uri);
+      xhr.send();
+    });
+  }
+  
+  async getExifDataFromImage(imageUri: string): Promise<any> {
+    try {
+      const blob = await this.uriToBlob(imageUri);
+      const arrayBuffer = await blob.arrayBuffer();
+      const exifData = ExifParserFactory.create(arrayBuffer).parse();
+      return exifData;
+    } catch (error) {
+      console.error('Error getting EXIF data:', error);
+      return null;
+    }
+  }
+  
+  async processImage() {
+    try {
+      const imageUri = this.picture;
+      const exifData = await this.getExifDataFromImage(imageUri);
+      console.log('EXIF Data:', exifData);
+    } catch (error) {
+      console.error('Error processing image:', error);
+    }
+  }
+
+  async send() : Promise<void> {
+    try {
+      const blob = await this.uriToBlob(this.picture);
+      const formData = new FormData();
+      const timestamp = new Date().getTime();
+      const filename = `photo_${timestamp}.jpg`;
+
+      formData.append('picture', blob, filename);
+      formData.append('latitude', this.latitude.toString());
+      formData.append('longitude', this.longitude.toString());
+      formData.append('date', new Date().toISOString());
+      formData.append('categoryId', this.selectedCategory.id.toString());
+      formData.append('comment', this.comment);
+
+      this.http.post<any>('https://localhost:44391/Main/AddPhoto', formData)
+        .subscribe(
+          response => {
+            console.log('Image successfully sent to the backend', response);
+          },
+          error => {
+            console.error('Error sending image to the backend', error);
+          }
+        );
+    } catch (error) {
+      console.error('Error processing image:', error);
+    }
   }
 }

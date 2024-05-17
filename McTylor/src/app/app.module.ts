@@ -9,10 +9,11 @@ import { PicturePageComponent } from './picture-page/picture-page.component';
 import { LastPageComponent } from './last-page/last-page.component';
 import { PicturePreviewComponent } from './picture-preview/picture-preview.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, WelcomePageComponent, PicturePageComponent, LastPageComponent, PicturePreviewComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule,],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

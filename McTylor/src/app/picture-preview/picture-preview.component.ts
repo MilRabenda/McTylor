@@ -19,15 +19,17 @@ export class PicturePreviewComponent implements OnInit {
 
   picture!: string;
 
-  comment!: string;
+  comment: string ="";
 
   latitude!: number;
 
   longitude!: number;
 
-  date!: Date;
+  exifLatitude!: number;
 
-  selectedCategory!: Category;
+  exifLongitude!: number;
+
+  selectedCategory: Category | undefined;
 
   categories: Category[] = [];
 
@@ -106,6 +108,8 @@ export class PicturePreviewComponent implements OnInit {
       const imageUri = this.picture;
       const exifData = await this.getExifDataFromImage(imageUri);
       console.log('EXIF Data:', exifData);
+      this.exifLatitude = exifData.tags?.GPSLatitude ? exifData.tags?.GPSLatitude : 0;
+      this.exifLongitude = exifData.tags?.GPSLongitude ? exifData.tags?.GPSLongitude : 0;
     } catch (error) {
       console.error('Error processing image:', error);
     }
@@ -119,11 +123,17 @@ export class PicturePreviewComponent implements OnInit {
       const filename = `photo_${timestamp}.jpg`;
 
       formData.append('picture', blob, filename);
-      formData.append('latitude', this.latitude.toString());
-      formData.append('longitude', this.longitude.toString());
       formData.append('date', new Date().toISOString());
-      formData.append('categoryId', this.selectedCategory.id.toString());
+      formData.append('categoryId', this.selectedCategory!.id.toString());
       formData.append('comment', this.comment);
+
+      if(this.exifLatitude != 0 && this.exifLongitude !=0){
+        formData.append('latitude', this.exifLatitude.toString());
+        formData.append('longitude', this.exifLongitude.toString());
+      } else {
+        formData.append('latitude', this.latitude.toString());
+        formData.append('longitude', this.longitude.toString());
+      }
 
       this.http.post<any>('https://localhost:44391/Main/AddPhoto', formData)
         .subscribe(

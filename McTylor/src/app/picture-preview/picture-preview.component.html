@@ -15,24 +15,24 @@
     </ion-row>
     <ion-row *ngIf="categories">
       <ion-col>
-        <ion-list class="ion-select">
-          <ion-item style="background: #32393E;">
-            <ion-select style="background: #32393E;" aria-label="Fruit" interface="action-sheet" placeholder="Select Category" [(ngModel)]="selectedCategory">
-                <ion-select-option *ngFor="let category of categories" [value]="category">{{ category.name }}</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
+        <div class="clipped-background">
+        <ion-select fill="outline" interface="action-sheet" placeholder="Select Category" [(ngModel)]="selectedCategory">
+          <ion-select-option *ngFor="let category of categories" [value]="category">{{ category.name }}</ion-select-option>
+        </ion-select>
+      </div>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-input class="ion-textarea" label="Comment" label-placement="floating" fill="outline" placeholder="Enter comment" [(ngModel)]="comment" ></ion-input>
+        <div class="clipped-background">
+        <ion-input class="ion-input" label="Comment" label-placement="floating" fill="outline" placeholder="Enter comment" [(ngModel)]="comment" ></ion-input>
+        </div>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
         <ion-nav-link router-direction="forward" [component]="component">
-          <ion-button style="width:100%" (click)="send()">Send</ion-button>
+          <ion-button style="width:100%" (click)="send()" [disabled]="!selectedCategory">Send</ion-button>
         </ion-nav-link>
       </ion-col>
     </ion-row>

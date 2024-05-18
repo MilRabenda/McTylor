@@ -3,6 +3,13 @@
 
 /** Ionic CSS Variables **/
 :root {
+  --title-color-light-theme: #1A1C29;
+  --comment-color-light-theme: #F3F3F3;
+  --text-color-light-theme: #797979;
+
+
+
+
   /** primary **/
 	--ion-color-primary: #C45FA0;
 	--ion-color-primary-rgb: 196,95,160;
@@ -10,6 +17,7 @@
 	--ion-color-primary-contrast-rgb: 0,0,0;
 	--ion-color-primary-shade: #ac548d;
 	--ion-color-primary-tint: #ca6faa;
+  
 
   /** secondary **/
   --ion-color-secondary: #3dc2ff;
@@ -74,6 +82,44 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  --ion-item-background: #F3F3F3;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--title-color-dark-theme);
+}
+
+.ion-input {
+  background: var(--comment-color-light-theme);
+  color: var(--text-color-light-theme);
+  --padding-end: 10px;
+  --padding-start: 10px;
+  --placeholder-color: var(--text-color-light-theme);
+  --highlight-color: #C45FA0;
+  --highlight-color-valid: #C45FA0;
+  --padding-start: 20px;
+  font-size: 16px;
+  height: 100px;
+  --ion-color-success: #C45FA0;
+}
+
+ion-select {
+  background: var(--ion-item-background);
+  color: var(--text-color-light-theme);
+  --placeholder-color: var(--text-color-light-theme);
+  --ion-text-color: var(--text-color-light-theme);
+  --ion-border-color: var(--ion-item-background);
+  --border-radius: 14px;
+  font-size: 16px;
+  --ion-color-success: #C45FA0;
+}
+
+ion-select::part(icon) {
+  color: #C45FA0;
+  opacity: 1;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -81,6 +127,47 @@
    * Dark Colors
    * -------------------------------------------
    */
+  :root {
+    --title-color-dark-theme: #FFFFFF;
+    --comment-color-dark-theme: #32393E;
+    --text-color-dark-theme: #bfbfbf;
+
+  }
+  .title {
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--title-color-dark-theme);
+  }
+
+  .ion-input {
+    background: var(--comment-color-dark-theme);
+    color: var(--text-color-dark-theme);
+    --padding-end: 10px;
+    --padding-start: 10px;
+    --placeholder-color: #797979;
+    --highlight-color: #C45FA0;
+    --highlight-color-valid: #C45FA0;
+    --padding-start: 20px;
+    font-size: 16px;
+    height: 100px;
+    --ion-color-success: #C45FA0;
+  }
+
+  ion-select {
+    background: var(--ion-item-background);
+    color: var(--text-color-dark-theme);
+    --placeholder-color: var(--text-color-dark-theme);
+    --ion-text-color: var(--text-color-dark-theme);
+    --ion-border-color: var(--ion-item-background);
+    border-radius: 14px;
+    font-size: 16px;
+    --ion-color-success: #C45FA0;
+}
+
+ion-select::part(icon) {
+  color: #C45FA0;
+  opacity: 1;
+}
 
   body {
     --ion-color-primary: #C45FA0;

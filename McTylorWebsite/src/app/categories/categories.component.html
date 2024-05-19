@@ -1,0 +1,54 @@
+<mat-card class="card">
+    <mat-card-header>
+        <mat-card-title>Categories</mat-card-title>
+        <mat-card-subtitle>You can modify categories here</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div>
+            <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-button (click)="deleteCategory(element.id)">
+                        <mat-icon style="color:#c45fa0; transform: scale(1.3)">delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+        
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                        showFirstLastButtons
+                        aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div>
+        <button mat-button style="background-color: #c45fa0; color:white" (click)="toggle()">Add Category</button>
+        <mat-card @myInsertRemoveTrigger *ngIf="isShown">
+            <mat-card-content>
+                <form class="example-form">
+                    <mat-form-field class="example-full-width">
+                    <mat-label>Name</mat-label>
+                    <input type="text" matInput [formControl]="nameFormControl" placeholder="Ex. pat@example.com">
+                        <mat-error>Category name is <strong>required</strong></mat-error>
+                    </mat-form-field>
+                </form>
+
+            <button mat-button style="background-color: #c45fa0; color:white" (click)="insertCategory()">Insert</button>
+
+            </mat-card-content>
+        </mat-card>
+
+    </mat-card-content>
+</mat-card>

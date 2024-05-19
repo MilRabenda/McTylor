@@ -1,1 +1,1 @@
-{"ContentRoots":["D:\\McTylor\\McTylorAPI\\wwwroot\\"],"Root":{"Children":null,"Asset":null,"Patterns":[{"ContentRootIndex":0,"Pattern":"**","Depth":0}]}}
+{"ContentRoots":["D:\\McTylor\\McTylorAPI\\wwwroot\\"],"Root":{"Children":{"uploads":{"Children":{"41e28883-29f5-49c4-835f-898f0e126961.jpg":{"Children":null,"Asset":{"ContentRootIndex":0,"SubPath":"uploads/41e28883-29f5-49c4-835f-898f0e126961.jpg"},"Patterns":null}},"Asset":null,"Patterns":null}},"Asset":null,"Patterns":[{"ContentRootIndex":0,"Pattern":"**","Depth":0}]}}

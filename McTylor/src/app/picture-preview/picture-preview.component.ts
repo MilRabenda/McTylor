@@ -3,10 +3,7 @@ import { LastPageComponent } from '../last-page/last-page.component';
 import { Geolocation } from '@capacitor/geolocation';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { HttpClient } from '@angular/common/http';
-import { Category } from '../Models/Category';
-import { Photo } from '../Models/Photo';
-import EXIF from 'exif-js';
-import { ExifParser } from 'ts-exif-parser/lib/ExifParser';
+import { Category } from '../../../../shared/Models/Category'
 import {ExifParserFactory} from "ts-exif-parser";
 
 @Component({

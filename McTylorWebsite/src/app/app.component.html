@@ -1,0 +1,25 @@
+<mat-toolbar class="navbar">
+  <button mat-icon-button (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="title">McTylor Website</span>
+  <span class="example-spacer"></span>
+</mat-toolbar>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <div class="navbar-list">
+    <button class="navbar-button" mat-button (click)="openPhotos()">
+      <mat-icon class="icon-color">image</mat-icon>
+      <span>Photos</span>
+    </button>
+    <button class="navbar-button" mat-button (click)="openCategories()">
+      <mat-icon class="icon-color">list</mat-icon>
+      <span>Categories</span>
+    </button>
+  </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet>
+    </router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

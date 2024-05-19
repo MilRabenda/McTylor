@@ -26,7 +26,7 @@ namespace McTylorAPI.Controllers
             return this.database.Categories.ToList();
         }
 
-        [HttpPost("AddCategory")]
+        [HttpPost("AddCategory/{name}")]
         public ActionResult AddCategory(string name)
         {
             try
@@ -47,7 +47,7 @@ namespace McTylorAPI.Controllers
             }
         }
 
-        [HttpDelete("DeleteCategory")]
+        [HttpDelete("DeleteCategory/{id}")]
         public ActionResult DeleteCategory(int id)
         {
             try

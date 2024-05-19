@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2ZiqkvNPMKtgg5qiiYrhR73f74DbqPjJ6NSiRwlryN4=",
+  "Hash": "z0EebzBMBfbB3ieG7+rv2EcEwyK9nY/R1lGtChJn0mE=",
   "Source": "McTylorAPI",
   "BasePath": "_content/McTylorAPI",
   "Mode": "Default",
@@ -15,5 +15,23 @@
       "Pattern": "**"
     }
   ],
-  "Assets": []
+  "Assets": [
+    {
+      "Identity": "D:\\McTylor\\McTylorAPI\\wwwroot\\uploads\\41e28883-29f5-49c4-835f-898f0e126961.jpg",
+      "SourceId": "McTylorAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\McTylor\\McTylorAPI\\wwwroot\\",
+      "BasePath": "_content/McTylorAPI",
+      "RelativePath": "uploads/41e28883-29f5-49c4-835f-898f0e126961.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\41e28883-29f5-49c4-835f-898f0e126961.jpg"
+    }
+  ]
 }

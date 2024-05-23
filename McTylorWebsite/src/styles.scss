@@ -35,8 +35,18 @@ $McTylorWebsite-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: -webkit-fill-available; }
+html, body { height: -webkit-fill-available;
+    --mat-stepper-header-selected-state-icon-background-color: #c45fa0;
+  --mat-stepper-header-selected-state-icon-foreground-color: white;
+  --mat-stepper-header-done-state-icon-background-color: #c45fa0;
+  --mat-stepper-header-done-state-icon-foreground-color: white;
+  --mat-stepper-header-edit-state-icon-background-color: #c45fa0;
+  --mat-stepper-header-selected-state-icon-background-color: #c45fa0;
+  --mat-option-selected-state-label-text-color: #c45fa0; 
+  --mat-select-focused-arrow-color: #c45fa0;
+  --mdc-outlined-text-field-focus-outline-color: #c45fa0}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 
 .title{
   color: #c45fa0;
@@ -83,7 +93,72 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: #ecece8;
 }
 
+.example-card {
+  max-width: 400px;
+  height: 700px;
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #fdfafc !important;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
 .card {
-height: -webkit-fill-available;
-margin: 10px;
+  margin: 10px;
+  display: flex;
+}
+
+.card-div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card-button-placement {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.filter {
+  width: max-content;
+  height: 76px;
+}
+
+.filter-wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.filter-button {
+  margin-left: 15px;
+  margin-bottom: 20px;
+}
+
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: #312a30;
+}
+
+.div-spinner {
+  display: flex;
+  justify-content: center;
+}
+
+.category-card {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.example-form {
+  width: 100%;
+}
+
+.example-form mat-error{
+  width: 100%;
+  margin-bottom: 10px;
 }

@@ -2,6 +2,7 @@
 using McTylorDB.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
+using System.Reflection.Metadata.Ecma335;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace McTylorAPI.Controllers
@@ -66,12 +67,52 @@ namespace McTylorAPI.Controllers
 
         //---------------- Photo ----------------
 
-        [HttpGet("GetPhotos")]
+         [HttpGet("GetPhotos")]
         public IEnumerable<Photo> GetPhotos()
         {
             return this.database.Photos
                 .OrderBy(photo => photo.Date)
                     .ToList();
+        }
+
+        [HttpGet("GetVerifiedPhotos")]
+        public IEnumerable<Photo> GetVerifiedPhotos()
+        {
+            return this.database.Photos
+                .Where(p => p.IsVerified)
+                .OrderBy(photo => photo.Date)
+                .ToList();
+        }
+
+        [HttpGet("GetUnauthorizedPhotos")]
+        public IEnumerable<Photo> GetUnauthorizedPhotos()
+        {
+            return this.database.Photos
+                .Where(p => p.IsVerified == false)
+                .OrderBy(photo => photo.Date)
+                .ToList();
+        }
+
+        [HttpPost("VerifyPhoto/{id}")]
+        public ActionResult VerifyPhoto(int id)
+        {                
+            var photo = this.database.Photos.FirstOrDefault(p => p.Id == id);
+
+                if(photo == null)
+                   return BadRequest("No photo found.");
+
+            try
+            {
+                photo.IsVerified = true;
+                this.database.Update(photo);
+                this.database.SaveChanges();
+
+                return Ok("Photo verified");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
         [HttpPost("AddPhoto")]
@@ -100,11 +141,46 @@ namespace McTylorAPI.Controllers
                 newPhoto.Longitude = Double.Parse(longitude, CultureInfo.InvariantCulture);
                 newPhoto.Date = Convert.ToDateTime(date);
                 newPhoto.Comment = comment;
+                newPhoto.TemporaryPath = "";
 
                 this.database.Photos.Add(newPhoto);
                 this.database.SaveChanges();
 
                 return Ok(new { filePath, date });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpPost("CopyPhotosToTemporary")]
+        public async Task<IActionResult> CopyPhotosToTemporary()
+        {
+            var photos = GetPhotos();
+            if (photos == null)
+                return BadRequest("No photos fetched.");
+
+            try
+            {
+                var temporaryDir = "D:/McTylor/McTylorWebsite/src/assets/temporary";
+                Directory.CreateDirectory("D:/McTylor/McTylorWebsite/src/assets/temporary");
+
+                foreach (var photo in photos)
+                {
+                    var fileName = Path.GetFileName(photo.Path);
+                    var sourceFilePath = photo.Path;
+                    var destinationFilePath = Path.Combine(temporaryDir, fileName);
+
+                    if (System.IO.File.Exists(sourceFilePath))
+                    {
+                        System.IO.File.Copy(sourceFilePath, destinationFilePath, true);
+                    }
+
+                    photo.TemporaryPath = fileName;
+                }
+
+                return Ok(new { message = "Photos copied successfully!", photos });
             }
             catch (Exception ex)
             {

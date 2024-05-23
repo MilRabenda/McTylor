@@ -37,6 +37,8 @@ export class CategoriesComponent implements OnInit, AfterViewInit{
 
   isShown: boolean = false;
 
+  isLoading = true;
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
@@ -53,6 +55,7 @@ export class CategoriesComponent implements OnInit, AfterViewInit{
     .subscribe(response =>{
       this.categories = response;
       this.dataSource.data = response;
+      this.isLoading = false;
     });
   }
 
@@ -69,7 +72,6 @@ export class CategoriesComponent implements OnInit, AfterViewInit{
   }
 
   insertCategory() : void {
-    console.log(this.nameFormControl.value);
     const categoryName = this.nameFormControl.value;
     this.http.post('https://localhost:44391/Main/AddCategory/' + categoryName, null)
       .subscribe(response => {

@@ -19,6 +19,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from'@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgOptimizedImage } from '@angular/common'
+import { MatSelectModule } from '@angular/material/select';
+
 
 
 @NgModule({
@@ -43,7 +47,10 @@ import { ReactiveFormsModule } from'@angular/forms';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule,
+    NgOptimizedImage,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -18,6 +18,10 @@ namespace McTylorDB.Models
         [Required]
         public string Path { get; set; }
 
+        public string TemporaryPath { get; set; }
+
+        public bool IsVerified { get; set; } = false;
+
         [Required]
         public DateTime Date { get; set; }
 

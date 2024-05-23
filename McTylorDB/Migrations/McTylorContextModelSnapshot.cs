@@ -57,6 +57,9 @@ namespace McTylorDB.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsVerified")
+                        .HasColumnType("bit");
+
                     b.Property<double>("Latitude")
                         .HasColumnType("float");
 
@@ -64,6 +67,10 @@ namespace McTylorDB.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TemporaryPath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

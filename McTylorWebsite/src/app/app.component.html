@@ -11,18 +11,19 @@
 <mat-drawer-container class="example-container" autosize [hasBackdrop]="true">
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <div class="navbar-list">
-    <button class="navbar-button" mat-button (click)="openPhotos()">
+    <button class="navbar-button" mat-button (click)="openPhotos(); drawer.toggle()">
       <mat-icon class="icon-color">image</mat-icon>
       <span>Photos</span>
     </button>
-    <button class="navbar-button" mat-button (click)="openCategories()">
+    <button class="navbar-button" mat-button (click)="openArchiwum(); drawer.toggle()">
+      <mat-icon class="icon-color">archive</mat-icon>
+      <span>Archive</span>
+    </button>
+    <button class="navbar-button" mat-button (click)="openCategories(); drawer.toggle()">
       <mat-icon class="icon-color">list</mat-icon>
       <span>Categories</span>
     </button>
-    <button class="navbar-button" mat-button (click)="openArchiwum()">
-      <mat-icon class="icon-color">list</mat-icon>
-      <span>Archiwum</span>
-    </button>
+    
   </div>
   </mat-drawer>
   <mat-drawer-content>

@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, inject } from '@angular/core';
 import { CopyFilesService } from '../Services/copyFilesService';
-import { PhotoWithCategory } from '../photos/photos.component';
 import { FormControl } from '@angular/forms';
 import { PhotoService } from '../Services/photo.service';
 import { CategoryService } from '../Services/category.service';
@@ -9,7 +8,8 @@ import { ArchivedPhoto } from '../Models/ArchivedPhoto';
 import { PageEvent } from '@angular/material/paginator';
 import { Photo } from '../../../../shared/Models/Photo';
 import { UserService } from '../Services/user.service';
-import { transition } from '@angular/animations';
+import { trigger, transition, style, animate } from '@angular/animations';
+
 
 
 export interface ArchivedPhotoWithCategory extends ArchivedPhoto {
@@ -191,16 +191,5 @@ export class ClosedCasesComponent implements AfterViewInit{
     this.pageSize = event.pageSize;
     this.updatePaginatedPhotos();
   }
-}
-function trigger(arg0: string, arg1: any[]): any {
-  throw new Error('Function not implemented.');
-}
-
-function style(arg0: { opacity: number; }): any {
-  throw new Error('Function not implemented.');
-}
-
-function animate(arg0: string, arg1: any): any {
-  throw new Error('Function not implemented.');
 }
 

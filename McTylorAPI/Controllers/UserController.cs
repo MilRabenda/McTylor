@@ -17,7 +17,7 @@ namespace McTylorAPI.Controllers
             databse = context;
         }
 
-        [HttpPost]
+        [HttpPost("AddUser")]
         [AllowAnonymous]
         public async Task<IActionResult> AddUser([FromBody] UserCreate newUser)
         {
@@ -29,7 +29,7 @@ namespace McTylorAPI.Controllers
             var user = new User
             {
                 Username = newUser.Username,
-                Password = newUser.Password, // Note: In a real-world application, you should hash the password before saving it
+                Password = newUser.Password,
                 Email = newUser.Email,
                 Role = newUser.Role,
             };
@@ -37,10 +37,9 @@ namespace McTylorAPI.Controllers
             databse.Users.Add(user);
             await databse.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user); // Assuming you have a GetUserById action
+            return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
         }
 
-        // Assuming you have a method to get user by Id
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(int id)
         {

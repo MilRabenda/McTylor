@@ -44,9 +44,9 @@
         <form class="example-form">
             <mat-form-field class="example-full-width">
             <mat-label>Name</mat-label>
-            <input type="text" matInput [formControl]="nameFormControl" placeholder="Ex. pat@example.com">
+            <input type="text" matInput [formControl]="nameFormControl" placeholder="Name">
             </mat-form-field>
         </form>
-        <button mat-button [disabled]="nameFormControl.invalid" style="background-color: #c45fa0; color:white" (click)="insertCategory()">Insert</button>
+        <button mat-button [disabled]="nameFormControl.invalid" class="button" (click)="insertCategory()">Insert</button>
     </mat-card-content>
 </mat-card>

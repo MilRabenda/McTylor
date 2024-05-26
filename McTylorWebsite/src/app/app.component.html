@@ -1,11 +1,14 @@
 <mat-toolbar class="navbar">
-  <button mat-icon-button (click)="drawer.toggle()">
+  <button *ngIf="isLoggedIn" mat-icon-button (click)="drawer.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
   <span class="title">McTylor Website</span>
   <span class="example-spacer"></span>
+  <button *ngIf="isLoggedIn" mat-icon-button matTooltip="Log out" (click)="logout()">
+    <mat-icon class="icon-color">account_circle</mat-icon>
+  </button> 
 </mat-toolbar>
-<mat-drawer-container class="example-container" autosize>
+<mat-drawer-container class="example-container" autosize [hasBackdrop]="true">
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <div class="navbar-list">
     <button class="navbar-button" mat-button (click)="openPhotos()">
@@ -15,6 +18,10 @@
     <button class="navbar-button" mat-button (click)="openCategories()">
       <mat-icon class="icon-color">list</mat-icon>
       <span>Categories</span>
+    </button>
+    <button class="navbar-button" mat-button (click)="openArchiwum()">
+      <mat-icon class="icon-color">list</mat-icon>
+      <span>Archiwum</span>
     </button>
   </div>
   </mat-drawer>

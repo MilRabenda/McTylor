@@ -7,4 +7,5 @@ export class Photo {
     longitude!: number;
     latitude!: number;
     temporaryPath!: string;
+    isVerified!: boolean;
 }

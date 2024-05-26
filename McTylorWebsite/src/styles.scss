@@ -8,7 +8,7 @@
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 @include mat.core();
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Unica+One&display=swap');
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
@@ -35,7 +35,7 @@ $McTylorWebsite-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: -webkit-fill-available;
+html, body { height: calc(100vh - 64px);
     --mat-stepper-header-selected-state-icon-background-color: #c45fa0;
   --mat-stepper-header-selected-state-icon-foreground-color: white;
   --mat-stepper-header-done-state-icon-background-color: #c45fa0;
@@ -50,6 +50,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .title{
   color: #c45fa0;
+  font-family: "Unica One", sans-serif;
+  font-size: x-large;
 }
 
 .icon-color{
@@ -72,12 +74,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   width: 100%;
   display: flex !important;
   justify-content: flex-start !important;
+  margin: 10px;
+  font-family: "Roboto", sans-serif;
+  font-size: initial;
 }
 
 .example-container {
   width: 100%;
   height: -webkit-fill-available;
   color: #ecece8;
+  font-family: "Roboto", sans-serif;
 
 }
 
@@ -104,8 +110,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
 }
 
 .card {
@@ -161,4 +170,70 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .example-form mat-error{
   width: 100%;
   margin-bottom: 10px;
+}
+
+.login-card {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+
+.mdc-text-field--outlined {
+  background-color: white;
+}
+--mdc-outlined-text-field-focus-label-text-color: #c45fa0;
+
+  mat-card {
+    max-width: 300px;
+    width: 300px;
+    height: 300px;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #e1afcf !important;
+    mat-card-title {
+      color: white;
+    }
+    mat-card-subtitle {
+      color: #eaeaea;
+    }
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+    }
+
+  }
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: white;
+}
+/* Font color */
+input.mat-input-element {
+  color: white;
+}
+
+.login-image {
+  color: white;
+  transform: scale(2);
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.button {
+  background-color: #c45fa0 !important; 
+  color:white !important;
+}
+
+.full-width {
+  width: 100%;
+}
+
+button {
+  font-family: "Roboto", sans-serif;
 }

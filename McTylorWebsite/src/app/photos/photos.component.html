@@ -1,7 +1,7 @@
 <mat-card class="card">
   <mat-card-header>
     <mat-card-title>Photos</mat-card-title>
-    <mat-card-subtitle>Here are all photos</mat-card-subtitle>
+    <mat-card-subtitle>Below are all the unverified photos.</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <div class="div-spinner" *ngIf="isLoading">
@@ -43,7 +43,11 @@
           >
             <mat-card class="example-card">
               <mat-card-header>
-                <div mat-card-avatar class="example-header-image"></div>
+                <div mat-card-avatar class="example-header-image">
+                  <mat-icon class="login-image" style="color: #c45fa0;"
+                  >unpublished</mat-icon
+                >
+                </div>
                 <mat-card-title>Photo</mat-card-title>
                 <mat-card-subtitle>{{ photo.categoryName }}</mat-card-subtitle>
               </mat-card-header>
@@ -67,7 +71,10 @@
                   >
                   Open maps
                 </button>
-                <button mat-button>SHARE</button>
+                <button mat-button (click)="openVerifyDialog(photo.id)">                 
+                  <mat-icon style="color: #c45fa0; transform: scale(1.3)"
+                  >check_circle</mat-icon
+                > Verify</button>
               </mat-card-actions>
             </mat-card>
           </div>

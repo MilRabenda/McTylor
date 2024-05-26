@@ -1,10 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, inject } from '@angular/core';
 import { Category } from '../../../../shared/Models/Category'
-import { HttpClient } from '@angular/common/http';
 import { FormControl, Validators } from '@angular/forms';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { CategoryService } from '../Services/category.service';
 
 
 @Component({
@@ -24,6 +24,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit, AfterViewInit{
+  categoryService = inject(CategoryService);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -39,32 +40,28 @@ export class CategoriesComponent implements OnInit, AfterViewInit{
 
   isLoading = true;
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   ngOnInit() {
-    this.getCategories();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.getCategories();
   }
 
   getCategories() : void {
-    this.http
-    .get<Category[]>('https://localhost:44391/Main/GetCategories')
-    .subscribe(response =>{
-      this.categories = response;
-      this.dataSource.data = response;
+    this.categoryService.getCategories().subscribe(categories =>{
+      this.categories = categories;
+      this.dataSource.data = categories;
       this.isLoading = false;
-    });
+    })
   }
 
   deleteCategory(id: number) : void{
-    this.http
-      .delete<any>('https://localhost:44391/Main/DeleteCategory/' + id)
-      .subscribe(response=>{
-        this.getCategories();
-      });
+    this.categoryService.deleteCategory(id).subscribe(response =>{
+      this.getCategories();
+    })
   }
 
   toggle() : void {
@@ -72,10 +69,9 @@ export class CategoriesComponent implements OnInit, AfterViewInit{
   }
 
   insertCategory() : void {
-    const categoryName = this.nameFormControl.value;
-    this.http.post('https://localhost:44391/Main/AddCategory/' + categoryName, null)
-      .subscribe(response => {
-        this.getCategories();
-      });
+    const categoryName = this.nameFormControl.value ? this.nameFormControl.value : " ";
+    this.categoryService.insertCategory(categoryName).subscribe(response =>{
+      this.getCategories();
+    })
   }
 }

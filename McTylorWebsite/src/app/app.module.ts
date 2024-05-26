@@ -14,7 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule, HttpRequest } from '@angular/common/http'; 
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
@@ -22,14 +22,35 @@ import { ReactiveFormsModule } from'@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgOptimizedImage } from '@angular/common'
 import { MatSelectModule } from '@angular/material/select';
+import { ClosedCasesComponent } from './closed-cases/closed-cases.component';
+import { LoginComponent } from './login/login.component';
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { StorageService } from './Services/storage.service';
+import { LoginService } from './Services/login.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { VerifyPhotoDialogComponent } from './photos/verify-photo-dialog/verify-photo-dialog.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
+export function jwtOptionsFactory() {
+  return {
+    // Configure your JWT options here, if needed
+  };
+}
+
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 @NgModule({
   declarations: [
     AppComponent,
     PhotosComponent,
     CategoriesComponent,
+    ClosedCasesComponent,
+    LoginComponent,
+    VerifyPhotoDialogComponent,
 ],
   imports: [
     BrowserModule,
@@ -50,9 +71,23 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     NgOptimizedImage,
-    MatSelectModule
+    MatDialogModule,
+    MatSelectModule,
+    MatTooltipModule,
+    JwtModule.forRoot({
+      config: {
+          tokenGetter: tokenGetter,
+          allowedDomains: ['localhost:4200'],
+          disallowedRoutes: ["http://example.com/examplebadroute/"],
+          authScheme: "Bearer " // Default value
+      }
+  })
   ],
-  providers: [],
+  providers: [    
+    JwtHelperService,
+    StorageService,
+    LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

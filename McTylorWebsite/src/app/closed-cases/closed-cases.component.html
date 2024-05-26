@@ -1,0 +1,97 @@
+<mat-card class="card">
+    <mat-card-header>
+
+      <mat-card-title>Photos</mat-card-title>
+      <mat-card-subtitle>Below are all the archived photos.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="div-spinner" *ngIf="isLoading">
+        <mat-spinner diameter="100" strokeWidth="10"></mat-spinner>
+      </div>
+      <div class="row" *ngIf="!isLoading">
+        <div class="col-12">
+          <div class="row filter-wrapper">
+            <div class="filter">
+              <mat-form-field @myInsertRemoveTrigger *ngIf="isShown">
+                <mat-label>Category</mat-label>
+                <mat-select [formControl]="categoryControl">
+                  <mat-option>None</mat-option>
+                  <mat-option
+                    *ngFor="let category of categories"
+                    [value]="category.id"
+                    >{{ category.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              <button class="filter-button" mat-button (click)="toggle()">
+                <mat-icon style="color: #c45fa0; transform: scale(1.3)"
+                  >filter_list</mat-icon
+                >
+                Filter by category
+              </button>
+              <button class="filter-button" mat-button (click)="sort()">
+                <mat-icon style="color: #c45fa0; transform: scale(1.3)"
+                  >swap_vert</mat-icon
+                >
+                Sort by date
+              </button>
+            </div>
+          </div>
+          <div class="row card-div">
+            <div
+              class="col-4 justify-content-start"
+              *ngFor="let photo of paginatedPhotos"
+            >
+              <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image">
+                      <mat-icon class="login-image" style="color: #c45fa0;"
+                      >check_circle</mat-icon
+                    >
+                    </div>
+                    <mat-card-title>Verified by {{photo.userEmail}}</mat-card-title>
+                    <mat-card-subtitle>{{photo.categoryName}}</mat-card-subtitle>
+                  </mat-card-header>
+                <img style="max-height: 500px;"
+                  mat-card-image
+                  src="assets/temporary/{{ photo.temporaryPath }}"
+                  alt="{{ photo.temporaryPath }}"
+                />
+                <mat-card-content>
+                  <p>
+                    {{ photo.comment }}
+                  </p>
+                </mat-card-content>
+                <mat-card-actions class="card-button-placement">
+                  <button
+                    mat-button
+                    (click)="openGoogleMaps(photo.latitude, photo.longitude)"
+                  >
+                    <mat-icon style="color: #c45fa0; transform: scale(1.3)"
+                      >map</mat-icon
+                    >
+                    Open maps
+                  </button>
+                  <button mat-button>                 
+                    <mat-icon style="color: #c45fa0; transform: scale(1.3)"
+                    >check_circle</mat-icon
+                  > Verify</button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 align-self-end">
+              <mat-paginator
+                [length]="photos.length"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="[5, 10, 20]"
+                (page)="onPageChange($event)"
+              >
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>

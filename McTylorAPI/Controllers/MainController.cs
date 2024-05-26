@@ -1,14 +1,20 @@
 ﻿using McTylorDB;
 using McTylorDB.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
+using System.IdentityModel.Tokens.Jwt;
 using System.Reflection.Metadata.Ecma335;
+using System.Security.Claims;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace McTylorAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
+
+
     public class MainController : ControllerBase
     {
         private readonly McTylorContext database;
@@ -19,7 +25,6 @@ namespace McTylorAPI.Controllers
         }
 
         //---------------- Category ----------------
-
 
         [HttpGet("GetCategories")]
         public IEnumerable<Category> GetCategories()
@@ -75,36 +80,48 @@ namespace McTylorAPI.Controllers
                     .ToList();
         }
 
-        [HttpGet("GetVerifiedPhotos")]
-        public IEnumerable<Photo> GetVerifiedPhotos()
+        [HttpGet("GetArchivedPhotos")]
+        public IEnumerable<ArchivedPhoto> GetArchivedPhotos()
         {
-            return this.database.Photos
-                .Where(p => p.IsVerified)
-                .OrderBy(photo => photo.Date)
-                .ToList();
-        }
-
-        [HttpGet("GetUnauthorizedPhotos")]
-        public IEnumerable<Photo> GetUnauthorizedPhotos()
-        {
-            return this.database.Photos
-                .Where(p => p.IsVerified == false)
-                .OrderBy(photo => photo.Date)
+            return this.database.ArchivedPhoto
+                .OrderBy(photo => photo.ArchivedDate)
                 .ToList();
         }
 
         [HttpPost("VerifyPhoto/{id}")]
-        public ActionResult VerifyPhoto(int id)
+        public ActionResult VerifyPhoto(int id, [FromQuery] string reasonOfArchive)
         {                
             var photo = this.database.Photos.FirstOrDefault(p => p.Id == id);
 
                 if(photo == null)
                    return BadRequest("No photo found.");
 
+            var userIdClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Unauthorized("User ID not found in token.");
+            }
+            var userId = int.Parse(userIdClaim.Value);
+
             try
             {
                 photo.IsVerified = true;
+
+                ArchivedPhoto archivedPhoto = new ArchivedPhoto();
+                archivedPhoto.ArchivedDate = DateTime.Now;
+                archivedPhoto.TemporaryPath = photo.TemporaryPath;
+                archivedPhoto.Path = photo.Path;
+                archivedPhoto.Longitude = photo.Longitude;
+                archivedPhoto.Latitude = photo.Latitude;
+                archivedPhoto.CategoryId = photo.CategoryId;
+                archivedPhoto.Comment = photo.Comment;
+                archivedPhoto.ReasonOfArchive = reasonOfArchive;
+                archivedPhoto.CreationDate = photo.Date;
+                archivedPhoto.UserId = userId;
+                archivedPhoto.PhotoId = photo.Id;
+
                 this.database.Update(photo);
+                this.database.ArchivedPhoto.Add(archivedPhoto);
                 this.database.SaveChanges();
 
                 return Ok("Photo verified");

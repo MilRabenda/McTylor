@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9E1KsT8v1ptoRtF1Jbx+W0buhy0WXUZWVpOGueRBwaw=",
+  "Hash": "rSOri3fndqJEhJbCAABb3J2oO083gpftdcC4xrR7kGA=",
   "Source": "McTylorAPI",
   "BasePath": "_content/McTylorAPI",
   "Mode": "Default",
@@ -85,6 +85,23 @@
       "OriginalItemSpec": "wwwroot\\uploads\\24e6ba6d-c664-4292-9c00-ab1029f4392b.jpg"
     },
     {
+      "Identity": "D:\\McTylor\\McTylorAPI\\wwwroot\\uploads\\289de311-08f7-46f6-9b4b-cf9b7d35fae7.jpg",
+      "SourceId": "McTylorAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\McTylor\\McTylorAPI\\wwwroot\\",
+      "BasePath": "_content/McTylorAPI",
+      "RelativePath": "uploads/289de311-08f7-46f6-9b4b-cf9b7d35fae7.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\289de311-08f7-46f6-9b4b-cf9b7d35fae7.jpg"
+    },
+    {
       "Identity": "D:\\McTylor\\McTylorAPI\\wwwroot\\uploads\\41e28883-29f5-49c4-835f-898f0e126961.jpg",
       "SourceId": "McTylorAPI",
       "SourceType": "Discovered",
@@ -151,6 +168,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\8e14346b-da5d-4c3c-a113-b9148996e90e.jpg"
+    },
+    {
+      "Identity": "D:\\McTylor\\McTylorAPI\\wwwroot\\uploads\\9d30dae0-046c-4c22-9622-d342dabb078b.jpg",
+      "SourceId": "McTylorAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\McTylor\\McTylorAPI\\wwwroot\\",
+      "BasePath": "_content/McTylorAPI",
+      "RelativePath": "uploads/9d30dae0-046c-4c22-9622-d342dabb078b.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\9d30dae0-046c-4c22-9622-d342dabb078b.jpg"
     },
     {
       "Identity": "D:\\McTylor\\McTylorAPI\\wwwroot\\uploads\\9fcd8d20-fe5b-4dd0-826b-24230d335084.jpg",

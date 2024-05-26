@@ -12,6 +12,8 @@ namespace McTylorDB
     {
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Photo> Photos { get; set; }
+        public virtual DbSet<ArchivedPhoto> ArchivedPhoto { get; set; }
+        public virtual DbSet<User> Users { get; set; }
         public McTylorContext() { }
         public McTylorContext(DbContextOptions options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 

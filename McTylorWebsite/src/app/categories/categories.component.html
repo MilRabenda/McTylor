@@ -1,4 +1,4 @@
-<mat-card class="card">
+<mat-card class="card email-card">
     <mat-card-header>
         <mat-card-title>Categories</mat-card-title>
         <mat-card-subtitle>You can modify categories here</mat-card-subtitle>
@@ -28,15 +28,92 @@
                 </td>
             </ng-container>
         
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr
+                class="row"
+                mat-row
+                (click)="openEmailList(row); toggleEmail(row)"
+                [ngClass]="{'highlight': selectedRowIndex == row.id && isEmailShown}"
+                *matRowDef="let row; columns: displayedColumns;"
+                ></tr>
             </table>
         </div>   
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+            <mat-paginator #categoriesPaginator [pageSizeOptions]="[5, 10, 20]"
                         showFirstLastButtons
                         aria-label="Select page of categories">
             </mat-paginator>
         <button mat-button style="background-color: #c45fa0; color:white" (click)="toggle()">Add Category</button>
+    </mat-card-content>
+</mat-card>
+<mat-card class="card" @myInsertRemoveTrigger *ngIf="isEmailShown">
+    <mat-card-header>
+        <mat-card-title>Email Correspondence</mat-card-title>
+        <mat-card-subtitle>All email communications related to {{selectedRowObject.name}} are displayed below</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="category-card">
+        <div *ngIf="usersCategory.length > 0">
+
+            <table mat-table [dataSource]="dataSourceUsers">
+
+            <ng-container matColumnDef="username">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedUsersColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedUsersColumns;"></tr>
+
+            </table>
+            <mat-paginator #usersPaginator [pageSizeOptions]="[5, 10, 20]"
+                        showFirstLastButtons
+                        aria-label="Select page of users">
+            </mat-paginator>
+        </div>
+
+            <div class="emptyDiv" *ngIf="usersCategory?.length == 0">
+                No user bound to this category was found
+            </div>
+            <div class="divider"></div>
+
+            <mat-card-title>Manage Users in This Category</mat-card-title>
+            <mat-card-subtitle>All users listed below</mat-card-subtitle>
+            <table mat-table [dataSource]="dataSourceAllUsers">
+
+                <ng-container matColumnDef="username">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> Email </th>
+                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
+    
+                    <tr mat-header-row *matHeaderRowDef="displayedAllUsersColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedAllUsersColumns;"></tr>
+                    
+                </table>
+                <mat-paginator #allUsersPaginator [pageSizeOptions]="[5, 10, 20]"
+                            showFirstLastButtons
+                            aria-label="Select page of users">
+                </mat-paginator>
+
+            <div class="divider"></div>
+            
+            <mat-card-title>Manage Users in This Category</mat-card-title>
+            <mat-card-subtitle>All users listed below</mat-card-subtitle>
+            <form class="example-form">
+                <mat-form-field class="example-full-width">
+                <mat-label>Name</mat-label>
+                <input type="text" matInput [formControl]="nameEditFormControl" placeholder="{{selectedRowObject.name}}">
+                </mat-form-field>
+            </form>
+            <button mat-button [disabled]="nameEditFormControl.invalid" class="button" (click)="editCategory(selectedRowObject.id)">Edit</button>
     </mat-card-content>
 </mat-card>
 <mat-card class="card" @myInsertRemoveTrigger *ngIf="isShown">

@@ -15,5 +15,7 @@ namespace McTylorDB.Models
         public string Name { get; set; }
 
         public ICollection<Photo> Photos { get; } = new List<Photo>();
+
+        public ICollection<User> Users { get; } = new List<User>();
     }
 }

@@ -14,7 +14,6 @@ namespace McTylorAPI.Controllers
     [Route("[controller]")]
     [Authorize]
 
-
     public class MainController : ControllerBase
     {
         private readonly McTylorContext database;
@@ -53,12 +52,54 @@ namespace McTylorAPI.Controllers
             }
         }
 
+        [HttpPost("EditCategory/{id}")]
+        public async Task<IActionResult> EditCategoryName(int id, [FromQuery] string newName)
+        {
+            if (string.IsNullOrWhiteSpace(newName))
+            {
+                return BadRequest("Category name cannot be empty.");
+            }
+
+            try
+            {
+                var category = await this.database.Categories.FindAsync(id);
+                if (category == null)
+                {
+                    return NotFound("Category not found.");
+                }
+
+                category.Name = newName;
+
+                this.database.Categories.Update(category);
+                await this.database.SaveChangesAsync();
+
+                return Ok(category);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpDelete("DeleteCategory/{id}")]
         public ActionResult DeleteCategory(int id)
         {
+            var category = this.database.Categories.FirstOrDefault(c => c.Id == id);
+            if (category == null)
+            {
+                return NotFound("Category not found.");
+            }
+
+            var photos = this.database.Photos.Where(p => p.CategoryId == id).ToList();
+            var users = this.database.Users.Where(u => u.CategoryId == id).ToList();
+
+            if (photos.Count > 0 || users.Count > 0)
+            {
+                return BadRequest("Cannot delete a category with photos or users in it.");
+            }
+
             try
             {
-                var category = this.database.Categories.FirstOrDefault(c => c.Id == id);
                 this.database.Categories.Remove(category);
                 this.database.SaveChanges();
 

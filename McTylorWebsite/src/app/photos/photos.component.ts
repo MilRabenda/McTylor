@@ -192,13 +192,14 @@ export class PhotosComponent implements OnInit, AfterViewInit {
 
     dialogRef.backdropClick().subscribe(_ => {
       // Close the dialog
-      dialogRef.close(true);
+      dialogRef.close(null);
     })
 
 
 
     dialogRef.afterClosed().subscribe(result => {
-      if(!result){
+      console.log(result);
+      if(result != null){
         console.log("zamkniecie dialogu")
         console.log(result)
         this.photoService.verifyPhoto(id, result).subscribe(response =>{

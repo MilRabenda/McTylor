@@ -237,3 +237,21 @@ input.mat-input-element {
 button {
   font-family: "Roboto", sans-serif;
 }
+
+.email-card .highlight {
+  background: #e1afcf; /* pink */
+}
+
+.email-card .row:hover {
+  background: #e1afcf;
+  cursor: pointer;
+}
+
+.divider {
+  border-top: 1px solid #e1afcf;
+  margin: 20px 10px 20px 10px;
+}
+
+.emptyDiv {
+  padding: 15px;
+}

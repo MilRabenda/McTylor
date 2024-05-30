@@ -16,6 +16,6 @@ export class VerifyPhotoDialogComponent {
   ) {}
 
   onNoClick(): void {
-    this.dialogRef.close(true);
+    this.dialogRef.close(null);
   }
 }

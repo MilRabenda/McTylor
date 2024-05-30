@@ -29,20 +29,25 @@ export class CategoryService {
     return this.http
       .get<Category[]>('https://localhost:44391/Main/GetCategories', {
         headers: this.headers,
-      })
-      .pipe();
+      });
   }
 
   insertCategory(categoryName : string): Observable<Object> {
     return this.http.post('https://localhost:44391/Main/AddCategory/' + categoryName, {
       headers: this.headers,
-    }).pipe();
+    });
   }
 
   deleteCategory(id : number): Observable<Object> {
     return this.http
     .delete<any>('https://localhost:44391/Main/DeleteCategory/' + id, {
       headers: this.headers,
-    }).pipe();
+    });
+  }
+  
+  editCategoryName(categoryId : number, categoryName : string): Observable<Object> {
+    return this.http.post(`https://localhost:44391/Main/EditCategory/${categoryId}?newName=${categoryName}`, null, {
+      headers: this.headers,
+    });
   }
 }

@@ -13,9 +13,12 @@ namespace McTylorDB.Models
     {
         public int Id { get; set; }
 
+        [ForeignKey("CategoryId")]
+        public int? CategoryId { get; set; }
+
         [Required]
         public string Username { get; set; }
-
+            
         [Required]
         public string Password { get; set; }
 

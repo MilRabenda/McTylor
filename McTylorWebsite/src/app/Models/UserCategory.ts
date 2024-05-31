@@ -1,4 +1,4 @@
 export class UserCategory {
     userId!: number;
-    categoryId!: number;
+    categoryId!: number | null;
 }

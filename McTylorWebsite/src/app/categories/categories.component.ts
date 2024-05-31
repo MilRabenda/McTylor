@@ -14,6 +14,10 @@ import { CategoryService } from '../Services/category.service';
 import { UserService } from '../Services/user.service';
 import { User } from '../Models/User';
 
+export interface UserExtended extends User {
+  isWithinCategory?: boolean
+}
+
 @Component({
   selector: 'app-categories',
   animations: [
@@ -48,19 +52,19 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
 
   displayedUsersColumns: string[] = ['username', 'email'];
 
-  displayedAllUsersColumns: string[] = ['username', 'email'];
+  displayedAllUsersColumns: string[] = ['username', 'email', 'modify'];
 
   categories: Category[] = [];
 
   usersCategory: User[] = [];
 
-  allUsers: User[] = [];
+  allUsers: UserExtended[] = [];
 
   dataSource = new MatTableDataSource<Category>();
 
   dataSourceUsers = new MatTableDataSource<User>();
 
-  dataSourceAllUsers = new MatTableDataSource<User>();
+  dataSourceAllUsers = new MatTableDataSource<UserExtended>();
 
   isShown: boolean = false;
 
@@ -81,6 +85,7 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.categoriesPaginator;
     this.getCategories();
+    this.getAllUsers();
   }
 
   getCategories(): void {
@@ -127,6 +132,12 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
 
   openEmailList(row: any): void {
     this.selectedRowIndex = row.id;
+    this.allUsers.map( user => {
+      user.isWithinCategory = this.selectedRowIndex == user.categoryId ? true : false;
+    });
+
+    this.dataSourceAllUsers.data = this.allUsers;
+    console.log(this.dataSourceAllUsers)
   }
 
   getUsersByCategory(categoryId : number): void {
@@ -135,7 +146,6 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
       this.dataSourceUsers.data = response;
       this.dataSourceUsers.paginator = this.usersPaginator;
 
-      this.getAllUsers();
     },
     (error) => {
       console.error('Error fetching users:', error);
@@ -149,9 +159,8 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
   getAllUsers(): void {
     this.userService.getAllUsers().subscribe((response) => {
       this.allUsers = response;
-      this.dataSourceAllUsers.data = response;
       this.dataSourceAllUsers.paginator = this.allUsersPaginator;
-    })
+    });
   }
 
   editCategory(categoryId: number): void {
@@ -162,6 +171,14 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
       this.isLoading = true;
       this.toggleEmail(this.selectedRowObject);
       this.getCategories();
+    })
+  }
+
+  changeUserCategory(row: UserExtended, toRemove: boolean): void {
+    const id = toRemove ? null : this.selectedRowObject.id
+    this.userService.changeUserCategory(row.id, id).subscribe((response)=>{
+      console.log(response);
+      location.reload();
     })
   }
 }

@@ -55,7 +55,7 @@ export class UserService {
     .pipe();
   }
   
-  changeUserCategory(userId: number, categoryId: number) : Observable<Object> {
+  changeUserCategory(userId: number, categoryId: number | null) : Observable<Object> {
     const body : UserCategory = {
       userId : userId,
       categoryId : categoryId

@@ -126,10 +126,6 @@ namespace McTylorAPI.Controllers
                 }
 
                 var category = database.Categories.SingleOrDefault(c => c.Id == userCategory.CategoryId);
-                if (category == null)
-                {
-                    return NotFound("Category not found");
-                }
 
                 user.CategoryId = userCategory.CategoryId;
 

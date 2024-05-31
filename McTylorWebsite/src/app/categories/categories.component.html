@@ -79,7 +79,7 @@
                 No user bound to this category was found
             </div>
             <div class="divider"></div>
-
+            <div *ngIf="allUsers.length > 0">
             <mat-card-title>Manage Users in This Category</mat-card-title>
             <mat-card-subtitle>All users listed below</mat-card-subtitle>
             <table mat-table [dataSource]="dataSourceAllUsers">
@@ -93,11 +93,31 @@
                     <th mat-header-cell *matHeaderCellDef> Email </th>
                     <td mat-cell *matCellDef="let element"> {{element.email}} </td>
                 </ng-container>
+
+                <ng-container matColumnDef="modify">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element">
+                        <button  *ngIf="element.isWithinCategory; else isNotWithinCategory" mat-button (click)="changeUserCategory(element, true)">
+                            <mat-icon  style="color: #c45fa0; transform: scale(1.3)">
+                                close
+                            </mat-icon>
+                        </button>
+
+                        <ng-template #isNotWithinCategory>
+                        <button mat-button (click)="changeUserCategory(element, false)">
+                                <mat-icon style="color: #c45fa0; transform: scale(1.3)">
+                                    add
+                                </mat-icon>
+                        </button>
+                    </ng-template>
+                    </td>
+                </ng-container>
     
                     <tr mat-header-row *matHeaderRowDef="displayedAllUsersColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedAllUsersColumns;"></tr>
                     
                 </table>
+            </div>
                 <mat-paginator #allUsersPaginator [pageSizeOptions]="[5, 10, 20]"
                             showFirstLastButtons
                             aria-label="Select page of users">
@@ -105,8 +125,8 @@
 
             <div class="divider"></div>
             
-            <mat-card-title>Manage Users in This Category</mat-card-title>
-            <mat-card-subtitle>All users listed below</mat-card-subtitle>
+            <mat-card-title>Edit Category Name</mat-card-title>
+            <mat-card-subtitle>Modify the category name below</mat-card-subtitle>
             <form class="example-form">
                 <mat-form-field class="example-full-width">
                 <mat-label>Name</mat-label>

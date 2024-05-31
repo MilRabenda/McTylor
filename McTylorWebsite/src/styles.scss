@@ -165,6 +165,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .example-form {
   width: 100%;
+  margin-top: 20px;
 }
 
 .example-form mat-error{
@@ -249,7 +250,7 @@ button {
 
 .divider {
   border-top: 1px solid #e1afcf;
-  margin: 20px 10px 20px 10px;
+  margin: 30px 10px 30px 10px;
 }
 
 .emptyDiv {

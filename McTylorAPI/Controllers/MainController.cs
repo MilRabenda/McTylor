@@ -1,9 +1,13 @@
-﻿using McTylorDB;
+﻿using McTylorAPI.Classes;
+using McTylorDB;
 using McTylorDB.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
+using System.Net.Mail;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
 using static System.Net.Mime.MediaTypeNames;
@@ -17,15 +21,18 @@ namespace McTylorAPI.Controllers
     public class MainController : ControllerBase
     {
         private readonly McTylorContext database;
+        private readonly EmailSettings emailSettings;
 
-        public MainController(McTylorContext context)
+        public MainController(McTylorContext context, IOptions<EmailSettings> emailSettings)
         {
             this.database = context;
+            this.emailSettings = emailSettings.Value;
         }
 
         //---------------- Category ----------------
 
         [HttpGet("GetCategories")]
+        [AllowAnonymous]
         public IEnumerable<Category> GetCategories()
         {
             return this.database.Categories.ToList();
@@ -174,6 +181,7 @@ namespace McTylorAPI.Controllers
         }
 
         [HttpPost("AddPhoto")]
+        [AllowAnonymous]
         public async Task<IActionResult> AddPhoto([FromForm] IFormFile picture, [FromForm] string latitude, 
             [FromForm] string longitude, [FromForm] string date, [FromForm] string categoryId, [FromForm] string comment)
         {
@@ -203,6 +211,9 @@ namespace McTylorAPI.Controllers
 
                 this.database.Photos.Add(newPhoto);
                 this.database.SaveChanges();
+
+                var users = this.database.Users.Where(u => u.CategoryId == Convert.ToInt32(categoryId)).ToList();
+                await Task.WhenAll(users.Select(user => SendEmailNotification(user.Email)));
 
                 return Ok(new { filePath, date });
             }
@@ -243,6 +254,32 @@ namespace McTylorAPI.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpGet("SendEmailNotification")]
+        [AllowAnonymous]
+        public async Task SendEmailNotification(string email)
+        {
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress(emailSettings.smtpUser);
+            mailMessage.To.Add(email);
+            mailMessage.Subject = "Nowe zgłoszenie";
+            mailMessage.Body = "Na serwerze pojawiło się nowe zgłoszenie w Twojej kategorii.";
+            mailMessage.IsBodyHtml = false;  
+
+            SmtpClient smtpClient = new SmtpClient(emailSettings.smtpServer, emailSettings.smtpPort);
+            smtpClient.Credentials = new NetworkCredential(emailSettings.smtpUser, emailSettings.smtpPass);
+            smtpClient.EnableSsl = true;  
+
+            try
+            {
+                await smtpClient.SendMailAsync(mailMessage);
+                Console.WriteLine("Email sent successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error sending email: " + ex.Message);
             }
         }
     }

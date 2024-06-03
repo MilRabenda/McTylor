@@ -31,6 +31,7 @@ import { LoginService } from './Services/login.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { VerifyPhotoDialogComponent } from './photos/verify-photo-dialog/verify-photo-dialog.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { AuthorComponent } from './author/author.component';
 
 
 export function jwtOptionsFactory() {
@@ -51,6 +52,7 @@ export function tokenGetter() {
     ClosedCasesComponent,
     LoginComponent,
     VerifyPhotoDialogComponent,
+    AuthorComponent,
 ],
   imports: [
     BrowserModule,

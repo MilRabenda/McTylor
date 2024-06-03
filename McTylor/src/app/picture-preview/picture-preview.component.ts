@@ -104,7 +104,6 @@ export class PicturePreviewComponent implements OnInit {
     try {
       const imageUri = this.picture;
       const exifData = await this.getExifDataFromImage(imageUri);
-      console.log('EXIF Data:', exifData);
       this.exifLatitude = exifData.tags?.GPSLatitude ? exifData.tags?.GPSLatitude : 0;
       this.exifLongitude = exifData.tags?.GPSLongitude ? exifData.tags?.GPSLongitude : 0;
     } catch (error) {

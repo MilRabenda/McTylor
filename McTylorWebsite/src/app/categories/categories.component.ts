@@ -48,7 +48,7 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
 
   nameEditFormControl = new FormControl('', [Validators.required]);
 
-  displayedColumns: string[] = ['id', 'name', 'delete'];
+  displayedColumns: string[] = ['id', 'name'];
 
   displayedUsersColumns: string[] = ['username', 'email'];
 
@@ -137,7 +137,6 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
     });
 
     this.dataSourceAllUsers.data = this.allUsers;
-    console.log(this.dataSourceAllUsers)
   }
 
   getUsersByCategory(categoryId : number): void {
@@ -177,7 +176,6 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
   changeUserCategory(row: UserExtended, toRemove: boolean): void {
     const id = toRemove ? null : this.selectedRowObject.id
     this.userService.changeUserCategory(row.id, id).subscribe((response)=>{
-      console.log(response);
       location.reload();
     })
   }

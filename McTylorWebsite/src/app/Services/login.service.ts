@@ -24,7 +24,6 @@ export class LoginService {
   login(user: UserLogin): Observable<any> {
     return this.http.post('https://localhost:44391/Auth/login', user, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        console.log(response);
         return response;
       }),
       catchError(error => {
@@ -40,11 +39,10 @@ export class LoginService {
       const accountId= decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
       this.http.get<User>(`https://localhost:44391/User/${accountId}`).subscribe((account)=>{
         userObject=account;
-        console.log(account)
         this.storageService.set('token', token);
         this.storageService.set('user', userObject);
         this.storageService.set('isLoggedIn', true);
-        this.router.navigateByUrl('/Photos');
+        this.router.navigateByUrl('/Photos').then(() => { location.reload()});
         this.loggedInSubject.next(true);
       });
     }

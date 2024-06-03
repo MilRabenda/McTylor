@@ -16,7 +16,6 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.loginService.getUserLoginStatus().subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
-      console.log(this.isLoggedIn)
     })
   }
 
@@ -30,6 +29,10 @@ export class AppComponent implements OnInit{
 
   openArchiwum(){
     this.router.navigateByUrl('/Archiwum');
+  }
+
+  openAuthor(){
+    this.router.navigateByUrl('/Author');
   }
 
   logout(){

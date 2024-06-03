@@ -185,28 +185,20 @@ export class PhotosComponent implements OnInit, AfterViewInit {
     this.isShown = !this.isShown;
   }
   openVerifyDialog(id: number): void {
-    console.log("verify hihi")
     const dialogRef = this.dialog.open(VerifyPhotoDialogComponent, {
       data: {photoId: id}
     });
 
     dialogRef.backdropClick().subscribe(_ => {
-      // Close the dialog
       dialogRef.close(null);
     })
 
 
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if(result != null){
-        console.log("zamkniecie dialogu")
-        console.log(result)
         this.photoService.verifyPhoto(id, result).subscribe(response =>{
-          console.log("weryfikacja zdjecia")
           this.photoService.getPhotos().subscribe((photos) => {
-          console.log("porbranie zdjecia")
-  
             this.photos = photos;
             this.copyFiles();
           });

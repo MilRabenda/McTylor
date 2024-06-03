@@ -67,7 +67,6 @@ export class ClosedCasesComponent implements AfterViewInit{
   ngAfterViewInit(): void {
     this.photoService.getArchivedPhotos().subscribe((photos) => {
       this.photos = photos;
-      console.log(photos)
       this.copyFiles();
     });
 
